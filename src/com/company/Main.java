@@ -53,19 +53,51 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException, ParseException, CloneNotSupportedException {
 
-
-        collectionOperation();
+       // MyReflect.Execute();
+        Stack<>
 
     }
 
+    public static int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap();
+        for (int i = 0; i < nums.length; i++) {
+            if (!map.containsKey(nums[i])) {
+                map.put(nums[i], 1);
+            } else {
+                int cnt = map.get(nums[i]);
+                map.replace(nums[i], cnt + 1);
+            }
+        }
+        int[] ans = new int[k];
+        // int index=0;
+
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(map.entrySet());
+
+        Collections.sort(list, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Map.Entry<Integer, Integer> en1 = (Map.Entry<Integer, Integer>) o1;
+                Map.Entry<Integer, Integer> en2 = (Map.Entry<Integer, Integer>) o2;
+                return en2.getValue().compareTo(en1.getValue());
+            }
 
 
+//            public int compare(Map.Entry<Integer,Integer> entry1,Map.Entry<Integer,Integer> entry2)
+//            {
+//                return entry2.getValue()-(entry1.getValue());//降序排序
+//            }
+        });
+        int index = 0;
+        while (index < k) {
+            ans[index++] = list.get(list.size() - 1 - index).getKey();
+        }
+        return ans;
+    }
 
 
-    public static void collectionOperation()
-    {
+    public static void collectionOperation() {
 
-        List<Integer> list=new ArrayList<>(10);
+        List<Integer> list = new ArrayList<>(10);
         list.add(3);
         list.add(23);
         list.add(100);
@@ -74,17 +106,11 @@ public class Main {
         list.add(100);
 
 
-
-        List<Integer> copy=new ArrayList<>();
-        Collections.copy(list,copy);
-
+        List<Integer> copy = new ArrayList<>();
+        Collections.copy(list, copy);
 
 
-
-
-        copy.forEach(x-> System.out.println(x));
-
-
+        copy.forEach(x -> System.out.println(x));
 
 
 //        int f=Collections.frequency(list,100);
@@ -101,7 +127,6 @@ public class Main {
 //        Collections.rotate(list,1);
 //        System.out.println("after rotated");
 //        list.forEach(x-> System.out.println(x));
-
 
 
 //
@@ -125,8 +150,6 @@ public class Main {
 //
 
 
-
-
 //        Collections.sort(students, new Comparator<Student>() {
 //            @Override
 //            public int compare(Student o1, Student o2) {
@@ -141,9 +164,6 @@ public class Main {
 //
 //
 //
-
-
-
 
 
     }
